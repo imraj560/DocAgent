@@ -2,6 +2,6 @@ __pycache__/
 *.pyc
 .env
 chroma_db/
-venv/
+.venv/
 app.log
 .DS_Store
