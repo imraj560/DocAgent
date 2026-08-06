@@ -6,12 +6,19 @@ The system ingests documents, splits them into semantic chunks, generates embedd
 
 Key Features
 📄 Upload and analyze PDFs and other documents
+
 🔍 Semantic search using vector embeddings
+
 🤖 Multi-agent workflow powered by LangGraph
+
 ✅ Document verification to reduce hallucinations
+
 🧠 Reflection agent for response refinement
+
 📝 Structured report generation with cited document context
+
 ⚡ Streaming AI responses for an interactive experience
+
 AI Workflow
 Document ingestion and preprocessing
 Text chunking and embedding generation
