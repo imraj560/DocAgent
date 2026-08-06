@@ -1,7 +1,7 @@
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, List, Dict
 from .research_agent import ResearchAgent
-from .verification_agent import VerificationAgent
+from .verificatoin_agent import VerificationAgent
 from .relevance_checker import RelevanceChecker
 from langchain_core.documents import Document
 from langchain.retrievers import EnsembleRetriever
