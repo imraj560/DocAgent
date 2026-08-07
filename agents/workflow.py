@@ -4,7 +4,7 @@ from .research_agent import ResearchAgent
 from .verificatoin_agent import VerificationAgent
 from .relevance_checker import RelevanceChecker
 from langchain_core.documents import Document
-from langchain.retrievers import EnsembleRetriever
+from langchain_classic.retrievers import EnsembleRetriever
 import logging
 
 logger = logging.getLogger(__name__)

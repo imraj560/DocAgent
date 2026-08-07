@@ -4,6 +4,9 @@ import logging
 from typing import Dict, List
 from langchain_core.documents import Document
 import json
+from dotenv import load_dotenv
+
+load_dotenv()  # Populates os.environ from your .env file
 
 logger = logging.getLogger(__name__)
 
