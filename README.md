@@ -38,6 +38,8 @@ Tech Stack
 
 Python
 
+React Js
+
 LangChain
 
 LangGraph
