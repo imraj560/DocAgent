@@ -5,7 +5,9 @@ from langchain_classic.retrievers import EnsembleRetriever
 from config.settings import settings
 import logging
 import os
+from dotenv import load_dotenv
 
+load_dotenv()  # Populates os.environ from your .env file
 logger = logging.getLogger(__name__)
 
 

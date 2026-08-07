@@ -1,11 +1,15 @@
 from openai import OpenAI
+from dotenv import load_dotenv
 import os
 from config.settings import settings
 import logging
+from dotenv import load_dotenv
+
+load_dotenv()  # Populates os.environ from your .env file
 
 logger = logging.getLogger(__name__)
 
-
+load_dotenv()  # Populates os.environ from your .env file
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 class RelevanceChecker:
