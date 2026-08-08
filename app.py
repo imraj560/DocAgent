@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from typing import List
+from typing import Annotated
 import shutil
 import tempfile
 import uuid
@@ -21,7 +22,7 @@ workflow = AgentWorkflow()
 app = FastAPI(
     title="DocChat API",
     version="1.0.0",
-    description="REST API for Multi-Agent RAG Document Intelligence"
+    openapi_version="3.0.3"
 )
 
 
@@ -41,7 +42,7 @@ async def health():
 #fileupload endpoint
 @app.post("/upload")
 async def upload_documents(
-    files: List[UploadFile] = File(...)
+    files: Annotated[list[UploadFile], File(...)]
 ):
     if not files:
         raise HTTPException(
