@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from typing import List
-from typing import Annotated
+from pydantic import BaseModel
 import shutil
 import tempfile
 import uuid
@@ -25,6 +25,10 @@ app = FastAPI(
     openapi_version="3.0.3"
 )
 
+class QuestionRequest(BaseModel):
+    session_id: str
+    question: str
+
 
 @app.get("/")
 async def root():
@@ -39,10 +43,10 @@ async def health():
         "status": "healthy"
     }
 
-#fileupload endpoint
+#upload file endpoint
 @app.post("/upload")
 async def upload_documents(
-    files: Annotated[list[UploadFile], File(...)]
+    files: List[UploadFile] = File(...)
 ):
     if not files:
         raise HTTPException(
@@ -143,3 +147,49 @@ async def upload_documents(
                 os.unlink(temp_file.name)
             except Exception:
                 pass
+
+#query endpoint
+@app.post("/ask")
+async def ask_question(request: QuestionRequest):
+
+    if not request.question.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Question cannot be empty."
+        )
+
+    session = sessions.get(request.session_id)
+
+    if session is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Session not found. Please upload your documents again."
+        )
+
+    retriever = session["retriever"]
+
+    try:
+        logger.info(f"Question: {request.question}")
+        logger.info(f"Retriever: {type(retriever)}")
+
+        result = workflow.full_pipeline(
+            question=request.question,
+            retriever=retriever
+        )
+
+        logger.info(f"Workflow result: {result}")
+
+        return {
+            "answer": result["draft_answer"],
+            "verification": result["verification_report"]
+        }
+
+    except Exception as e:
+        logger.error(
+            f"Question processing error: {str(e)}"
+        )
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to process question: {str(e)}"
+        )

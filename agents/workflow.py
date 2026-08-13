@@ -7,6 +7,10 @@ from langchain_core.documents import Document
 from langchain_classic.retrievers import EnsembleRetriever
 import logging
 
+# curl -X POST "http://127.0.0.1:8000/upload" \
+#   -H "accept: application/json" \
+#   -F "files=@/c/Users/Raju/Downloads/Raju_Ahmed_Resume.pdf"
+
 logger = logging.getLogger(__name__)
 
 class AgentState(TypedDict):
@@ -59,8 +63,10 @@ class AgentWorkflow:
         classification = self.relevance_checker.check(
             question=state["question"], 
             retriever=retriever, 
-            k=20
+            k=5
         )
+
+        print(f"[DEBUG] Relevance classification: {classification}")
 
         if classification == "CAN_ANSWER":
             # We have enough info to proceed
