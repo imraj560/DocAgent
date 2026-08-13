@@ -63,16 +63,16 @@ class RelevanceChecker:
 
         # Call the LLM
         try:
-           response = client.chat.completions.create(
-                model="gpt-5",
+            response = self.client.chat.completions.create(
+                #model="gpt-5",
+                model="gpt-4.1-mini",
                 messages=[
                     {
                         "role": "user",
                         "content": prompt
                     }
                 ],
-                temperature=0,
-                max_completion_tokens=10,
+                max_completion_tokens=20,
             )
         except Exception as e:
             logger.error(f"Error during model inference: {e}")
@@ -80,7 +80,16 @@ class RelevanceChecker:
 
         # Extract the content from the response
         try:
-            llm_response = response.choices[0].message.content.strip().upper()
+            print("FULL OPENAI RESPONSE:")
+            print(response)
+
+            llm_response = response.choices[0].message.content
+
+            if not llm_response:
+                print("WARNING: Model returned empty content")
+                return "NO_MATCH"
+
+            llm_response = llm_response.strip().upper()
             logger.debug(f"LLM response: {llm_response}")
         except (IndexError, KeyError) as e:
             logger.error(f"Unexpected response structure: {e}")

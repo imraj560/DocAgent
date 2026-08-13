@@ -1,5 +1,7 @@
-from typing import Dict
+from typing import Dict, Any
 
 #each users retriever stored in memory
-sessions: Dict[str, dict] = {}
+sessions: Dict[str, Any] = {}
+
+
 
