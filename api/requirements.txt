@@ -12,6 +12,7 @@ bcrypt==5.0.0
 beautifulsoup4==4.15.0
 brotli==1.2.0
 build==1.5.0
+rank_bm25
 certifi==2026.6.17
 charset-normalizer==3.4.9
 chromadb==1.5.9
