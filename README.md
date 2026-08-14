@@ -19,8 +19,6 @@ Users can upload documents through the React frontend, ask questions, and receiv
 - ✍️ AI-powered answer generation
 - ✅ Independent answer verification
 - 🔄 Re-research loop when verification fails
-- 📊 Token usage tracking
-- 💰 LLM cost awareness
 - 🔐 File validation and API security considerations
 - ⚡ FastAPI backend
 - ⚛️ React frontend
