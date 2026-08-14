@@ -29,8 +29,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://docchat560.netlify.app/",
-        "https://docchat560.netlify.app/",
+        "https://docchat560.netlify.app",
+        "https://docchat560.netlify.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
