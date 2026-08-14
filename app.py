@@ -12,6 +12,7 @@ from agents.workflow import AgentWorkflow
 from sessions import sessions
 from config import constants
 from utils.logging import logger
+from fastapi.middleware.cors import CORSMiddleware
 
 #lets initiate the classes
 processor = DocumentProcessor()
@@ -23,6 +24,17 @@ app = FastAPI(
     title="DocChat API",
     version="1.0.0",
     openapi_version="3.0.3"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 class QuestionRequest(BaseModel):
